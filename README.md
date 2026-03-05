@@ -50,22 +50,6 @@ Princípios adotados:
 
 ## ✔ Status: Implementado (estrutura base)
 
-### Estrutura do Projeto
-
-backend/
- ├── app/
- │   ├── api/          # Endpoints
- │   ├── core/         # Configurações centrais
- │   ├── repository/   # Acesso a dados
- │   ├── schemas/      # Validação de dados
- │   ├── services/     # Regras de negócio
- │   ├── tests/        # Testes automatizados
- │   └── main.py       # Ponto de entrada
- │
- ├── requirements.txt
- ├── .env
- └── README.md
-
 ### Funcionalidades atuais
 
 - Estrutura modular organizada
