@@ -54,3 +54,28 @@ class UserRepository:
             password_hash=password_hash,
         )
 
+    def get_all(self) -> list[UserInDB]:
+        users = []
+        docs = self._collection.stream()
+        for doc in docs:
+            data = doc.to_dict()
+            users.append(
+                UserInDB(
+                    id=doc.id,
+                    email=data["email"],
+                    full_name=data.get("full_name"),
+                    role=data.get("role", "user"),
+                    password_hash=data["password_hash"],
+                )
+            )
+        return users
+
+    def update_user(self, user_id: str, updates: dict) -> None:
+        doc_ref = self._collection.document(user_id)
+        if updates:
+            doc_ref.update(updates)
+
+    def delete_user(self, user_id: str) -> None:
+        doc_ref = self._collection.document(user_id)
+        doc_ref.delete()
+
