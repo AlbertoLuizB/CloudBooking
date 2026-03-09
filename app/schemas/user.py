@@ -25,3 +25,8 @@ class UserPublic(UserBase):
     id: str
     role: Role = "user"
 
+
+class UserUpdate(BaseModel):
+    full_name: Optional[str] = None
+    password: Optional[str] = Field(None, min_length=8)
+

@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -16,10 +16,11 @@ class Settings(BaseSettings):
     firebase_project_id: str
     firebase_credentials_json_path: str
 
-    class Config:
-        env_file = ".env"
-        env_prefix = ""
-        case_sensitive = False
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="",
+        case_sensitive=False
+    )
 
 
 @lru_cache
