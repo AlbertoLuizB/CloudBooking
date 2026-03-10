@@ -14,7 +14,8 @@ class Settings(BaseSettings):
     jwt_access_token_expire_minutes: int = 60
 
     firebase_project_id: str
-    firebase_credentials_json_path: str
+    firebase_credentials_json_path: str | None = None
+    firebase_credentials_json: str | None = None
 
     model_config = SettingsConfigDict(
         env_file=".env",
