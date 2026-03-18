@@ -79,14 +79,22 @@ Princípios adotados:
 
 # ☁ Deploy em Nuvem
 
-Em desenvolvimento (Será renderizado e instanciado em nuvem)
-
+## ✔ Status: Implementado
+- **Back-end e API**: Instanciados no **Render**.
+- **Front-end**: Deploy contínuo no **Vercel**.
+- 👉 [🔗 Acesse a Aplicação Frontend (http://cloudbooking-front.vercel.app/)]
+- 👉 [🔗 Acesse a API Docs / Swagger (https://cloudbooking.onrender.com/health)]
 
 ---
 
 # 🎨 Front-end
 
-Em desenvolvimento (Interface do usuário consumirá essa API)
+## ✔ Status: Implementado
+- Framework moderno: **React**.
+- Estilização: **Tailwind CSS**.
+- Requisições na API Rest: Axios integrado com **React Query**.
+- Gerenciamento de Estado: **Zustand**.
+- Validações: **Zod** e **React Hook Form**.
 
 
 ---
@@ -156,9 +164,9 @@ Demonstrar a construção de uma aplicação moderna baseada em:
 - [x] Integração com Firebase
 - [x] Implementação de autenticação (e autorização role-based)
 - [x] Dockerfile
-- [x] Pipeline CI/CD com Testes em Nuvem
-- [ ] Deploy em nuvem pública externa (Back-end production mode)
-- [ ] Desenvolvimento do Front-end e Consumo de API
+- [x] Pipeline CI/CD com Testes automatizados em Nuvem e Deploy Automático
+- [x] Deploy em nuvem pública externa (Back-end no Render)
+- [x] Desenvolvimento do Front-end (React + Tailwind) e Consumo de API
 
 ---
 
