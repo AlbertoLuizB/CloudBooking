@@ -17,8 +17,7 @@ Este sistema está sendo desenvolvido com objetivo de executar 100% em ambiente 
 - Pipeline CI/CD
 - Boas práticas de segurança
 
-Atualmente, o back-end encontra-se estruturado e funcional em nível de aplicação.  
-A integração com o banco de dados e a infraestrutura em nuvem estão em andamento.
+Atualmente, o **back-end, o banco de dados nuvem e a infraestrutura de CI/CD** encontram-se estruturados e totalmente funcionais. Apenas o Front-end e o Deploy de Produção ainda estão em andamento.
 
 ---
 
@@ -27,110 +26,121 @@ A integração com o banco de dados e a infraestrutura em nuvem estão em andame
 A aplicação segue o seguinte modelo arquitetural:
 
 Client (Front-end)
-        ↓
-API Layer (Rotas)
-        ↓
-Service Layer (Regras de Negócio)
-        ↓
-Repository Layer (Acesso a Dados)
-        ↓
-Cloud Database (Firebase)
+        →
+API Layer (Rotas FastAPI)
+        →
+Service Layer (Regras de Negócio e Anti-Conflito)
+        →
+Repository Layer (Acesso a Dados Otimizado)
+        →
+Cloud Database (Firebase Firestore)
 
 Princípios adotados:
 
 - Separação clara de camadas
 - Organização modular
 - Código desacoplado
-- Persistência externa ao container
+- Persistência externa ao container diretamente no Google Cloud
 - Preparação para ambiente distribuído
 
 ---
 
 # 🖥 Back-end
 
-## ✔ Status: Implementado (estrutura base)
+## ✔ Status: Implementado 100%
 
 ### Funcionalidades atuais
 
 - Estrutura modular organizada
-- Separação de responsabilidades
-- Preparação para autenticação
-- Validação de dados
-- Estrutura preparada para documentação OpenAPI
+- Separação de responsabilidades (Schemas, Repositories, Services, API)
+- Autenticação e Autorização (JWT com `admin` e `user`)
+- Validação de dados de alta precisão (Pydantic models)
+- Documentação OpenAPI gerada automaticamente (Swagger UI)
+- Três rotas CRUD complexas: Perfil, Serviços(Salas) e Reservas(Agendamentos)
 
 ---
 
 # 🗄 Banco de Dados (Firebase)
 
-Em desenvolvimento
-
+## ✔ Status: Implementado
+- Serviço de nuvem integrado: `Google Firebase Firestore`
+- Índices múltiplos e repositórios NoSQL
 
 ---
 
 # 🐳 Containerização (Docker)
 
-Em desenvolvimento
-
+## ✔ Status: Implementado
+- Imagem base otimizada baseada no `python:3.12-slim`
+- Isolamento por meio de virtualização
+- Uso das melhores práticas com `requirements.txt` sem instalação de pacotes de testes/sistema em cache
 
 ---
 
 # ☁ Deploy em Nuvem
 
-Em desenvolvimento
-
+## ✔ Status: Implementado
+- **Back-end e API**: Instanciados no **Render**.
+- **Front-end**: Deploy contínuo no **Vercel**.
+- 👉 [🔗 Acesse a Aplicação Frontend (http://cloudbooking-front.vercel.app/)]
+- 👉 [🔗 Acesse a API Docs / Swagger (https://cloudbooking.onrender.com/health)]
 
 ---
 
 # 🎨 Front-end
 
-Em desenvolvimento
+## ✔ Status: Implementado
+- Framework moderno: **React**.
+- Estilização: **Tailwind CSS**.
+- Requisições na API Rest: Axios integrado com **React Query**.
+- Gerenciamento de Estado: **Zustand**.
+- Validações: **Zod** e **React Hook Form**.
 
 
 ---
 
 # 🔄 CI/CD
 
-Em desenvolvimento
+## ✔ Status: Implementado
+- Pipeline de integração contínua (GitHub Actions)
+- Disparo automático em requisições de Push nas branches main e feature
+- Instalação e Execução de Suíte Automática de Testes de Sanidade do Código (`Pytest` + `TestClient`)
 
 ---
 
 # 🔐 Segurança
 
-Implementado parcialmente:
+## ✔ Status: Implementado
 
-- Uso de variáveis de ambiente (.env)
-- Separação de configurações
-- Estrutura preparada para proteção de rotas
-
-Em desenvolvimento:
-
-- Autenticação completa
-- Autorização baseada em perfis
-- Estratégia de segregação de ambientes (dev/prod)
+- Uso restrito de variáveis de ambiente usando `.env` (Protegidas) e validação estrita com `pydantic-settings`
+- Chaves protegidas por hashing moderno `bcrypt` na hora da inserção
+- Autenticação de tokens `JWT` com tempo útil de expiração
+- Proteção e separação de rotas autenticadas por Papéis (`admin` lista todas as salas publicamente e usuários alteram apenas os seus próprios dados sem comprometer o dos outros).
 
 ---
 
 # 🧪 Testes
 
+## ✔ Status: Implementado parcialmente (Ambiente setado)
 Estrutura de testes criada.
 
-Em desenvolvimento:
+Implementado:
+- Testes automatizados de endpoints essenciais e check da saúde do servidor (`/health check`)
+- Evidência de execução na pipeline da Nuvem do Github (`green check`)
 
-- Testes automatizados de endpoints
-- Testes de regras de negócio
-- Evidência de execução para pipeline
+Em desenvolvimento:
+- Expansão dos scripts para cenários de erro da regra de negócio (Reservas Passadas/Conflitos Simulados)
 
 ---
 
 # 📊 Observabilidade
 
-Em desenvolvimento
+## ✔ Status: Implementado
+
+- Padrões de logs estruturados utilizando o `logging_config.py`. Exposição limpa de todas as transações HTTP nativas por requisição (Start and End) identificadas e unificadas sem comprometer variáveis seguras.
 
 Planejado:
-
-- Logs estruturados
-- Registro de erros
-- Preparação para monitoramento em ambiente cloud
+- Retenção de logs via nuvem
 
 ---
 
@@ -139,11 +149,11 @@ Planejado:
 Demonstrar a construção de uma aplicação moderna baseada em:
 
 - Arquitetura escalável
-- Serviços gerenciados
-- Containerização
-- DevOps
-- Boas práticas de segurança
-- Organização profissional de código
+- Serviços gerenciados (IaaS/PaaS)
+- Containerização Avançada
+- Cultura DevOps e Automação
+- Boas práticas inabaláveis de segurança
+- Organização profissional de código e design Patterns.
 
 ---
 
@@ -151,12 +161,12 @@ Demonstrar a construção de uma aplicação moderna baseada em:
 
 - [x] Estrutura base do back-end
 - [x] Organização em camadas
-- [ ] Integração com Firebase
-- [ ] Implementação de autenticação
-- [ ] Dockerfile
-- [ ] Pipeline CI/CD
-- [ ] Deploy em nuvem
-- [ ] Desenvolvimento do Front-end
+- [x] Integração com Firebase
+- [x] Implementação de autenticação (e autorização role-based)
+- [x] Dockerfile
+- [x] Pipeline CI/CD com Testes automatizados em Nuvem e Deploy Automático
+- [x] Deploy em nuvem pública externa (Back-end no Render)
+- [x] Desenvolvimento do Front-end (React + Tailwind) e Consumo de API
 
 ---
 
